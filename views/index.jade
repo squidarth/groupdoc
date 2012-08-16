@@ -1,2 +1,14 @@
 h1= title
 p Welcome to #{title}
+  
+  form(name="document",method="post",action="/doc")
+    label Title 
+    p  
+      input(type="text",name="title")
+    label Content 
+    p  
+      textarea(name="content")  
+  ul
+    - for (var doc in documents)
+      p= doc.title
+      p= doc.content

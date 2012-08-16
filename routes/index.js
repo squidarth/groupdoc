@@ -3,5 +3,9 @@
  * GET home page.
  */
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' })
+  var documents;
+  Doc.find({}, function(err, docs) {
+    documents = docs;
+  });
+  res.render('index', { title: 'Express', documents: documents})
 };

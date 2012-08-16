@@ -9,7 +9,7 @@ var express = require('express')
 
 var app = module.exports = express.createServer();
 
-//mongoose.connect('mongodb://localhost/groupdoc');
+
 
 // Configuration
 
@@ -33,9 +33,36 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
+/* Mongoose Settings */
+
+mongoose.connect('mongodb://localhost/groupdoc');
+
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
+
+var Document = new Schema({
+  id : ObjectId, 
+  title : String,
+  content : String,
+  created_at : Date
+});
+
+var Doc = mongoose.model("Document", Document);
+
 // Routes
 
-app.get('/', routes.index);
+app.post("/doc", function (req, res) {
+  console.log(req);
+  res.redirect("/");
+});
+
+app.get('/', function(req, res) {
+  var documents;
+  Doc.find({}, function(err, docs) {
+    documents = docs;
+  });
+  res.render('index', { title: 'Express', documents: documents})
+});
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
