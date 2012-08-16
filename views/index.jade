@@ -1,5 +1,5 @@
-h1= title
-p Welcome to #{title}
+h1 GroupDoc
+p New Document 
   
   form(name="document",method="post",action="/doc")
     label Title 
@@ -8,6 +8,8 @@ p Welcome to #{title}
     label Content 
     p  
       textarea(name="content")  
+    p
+      button(type="submit") Submit
   ul
     - for (var doc in documents)
       p= doc.title
