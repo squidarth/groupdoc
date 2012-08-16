@@ -1,4 +1,4 @@
-h1 GroupDoc
+h1 GroupDoc 
 p New Document 
   
   form(name="document",method="post",action="/doc")
@@ -10,7 +10,8 @@ p New Document
       textarea(name="content")  
     p
       button(type="submit") Submit
+  p= documents.length 
   ul
-    - for (var doc in documents)
-      p= doc.title
-      p= doc.content
+    each doc in documents
+      p Title: #{doc.title}
+      p Content: #{doc.content}

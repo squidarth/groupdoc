@@ -65,11 +65,12 @@ app.post("/doc", function (req, res) {
 });
 
 app.get('/', function(req, res) {
-  var documents = [];
   Doc.find(function(err, documents) {
     console.log("finished executing query");
+    console.log({ title: 'Express', documents: documents});
 
-    res.render('index', { title: 'Express', documents: documents})
+    res.render('index', { title: 'Express', documents: documents});
+    console.log("finished rendering");
   });
   console.log("exiting routing logic");
 });
