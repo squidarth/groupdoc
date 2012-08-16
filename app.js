@@ -52,16 +52,26 @@ var Doc = mongoose.model("Document", Document);
 // Routes
 
 app.post("/doc", function (req, res) {
-  console.log(req.body);
+  //var content = req.body.content
+  //var title = req.body.title
+  var doc = new Doc({title: req.body.title, content: req.body.content});
+  doc.save(function(err) {console.log("meow");});
+
+  //doc.title = req.body.title;
+  //doc.content = req.body.content;
+
+  //doc.save(function(err) {console.log(err);});
   res.redirect("/");
 });
 
 app.get('/', function(req, res) {
-  var documents;
-  Doc.find({}, function(err, docs) {
-    documents = docs;
+  var documents = [];
+  Doc.find(function(err, documents) {
+    console.log("finished executing query");
+
+    res.render('index', { title: 'Express', documents: documents})
   });
-  res.render('index', { title: 'Express', documents: documents})
+  console.log("exiting routing logic");
 });
 
 app.listen(3000);
