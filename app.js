@@ -5,7 +5,8 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , mongoose = require('mongoose');
+  , mongoose = require('mongoose')
+  , passport = require('passport');
 
 var app = module.exports = express.createServer();
 
